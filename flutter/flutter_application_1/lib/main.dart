@@ -4,6 +4,38 @@ void main() {
   runApp(const MyApp());
 }
 
+class AppBottomNavigationBar extends StatelessWidget {
+  const AppBottomNavigationBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      onTap: (value) {
+        if (value == 0) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder:
+                  (context) => const MyHomePage(title: 'Feeling good home'),
+            ),
+          );
+        }
+
+        if (value == 1) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const SecondRoute()),
+          );
+        }
+      },
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
+        BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
+      ],
+    );
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -65,40 +97,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (value) {
-          if (value == 0) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder:
-                    (context) => const MyHomePage(title: 'Feeling good home'),
-              ),
-            );
-          }
-
-          if (value == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const SecondRoute()),
-            );
-          }
-        },
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-        ],
-      ),
+      bottomNavigationBar: AppBottomNavigationBar(),
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
@@ -126,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
@@ -137,7 +137,11 @@ class SecondRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Second Route')),
+      bottomNavigationBar: AppBottomNavigationBar(),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text("Second Route"),
+      ),
       body: Center(
         child: ElevatedButton(
           onPressed: () {
