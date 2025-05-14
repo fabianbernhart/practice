@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../routing/routes.dart';
 
 class HomeViewModel extends ChangeNotifier {
-  String title = 'Home';
-  String description = 'Welcome to the Home Screen!';
+  String title = 'Get Started';
+  String description = 'Welcome to Burple!';
 
   String getStartedText = 'Get Started';
 
