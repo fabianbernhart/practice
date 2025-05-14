@@ -10,25 +10,43 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(viewModel.title)),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              viewModel.title,
-              style: Theme.of(context).textTheme.displayLarge,
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  viewModel.title,
+                  style: Theme.of(context).textTheme.displayLarge,
+                ),
+                Text(
+                  viewModel.description,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+              ],
             ),
-            Text(
-              viewModel.description,
-              style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          Positioned(
+            width: MediaQuery.of(context).size.width,
+            bottom: 20,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Center(
+                  child: SizedBox(
+                    width: 350,
+                    height: 40,
+                    child: FilledButton(
+                      onPressed: () {},
+                      child: Text(viewModel.getStartedText),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            FilledButton(
-              onPressed: () {},
-              child: Text(viewModel.getStartedText),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
