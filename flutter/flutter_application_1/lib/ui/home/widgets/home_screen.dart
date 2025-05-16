@@ -20,9 +20,25 @@ class HomeScreen extends StatelessWidget {
                   viewModel.title,
                   style: Theme.of(context).textTheme.displayLarge,
                 ),
-                Text(
-                  viewModel.description,
-                  style: Theme.of(context).textTheme.headlineSmall,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      viewModel.description,
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    Text(
+                      viewModel.appName,
+                      style: TextStyle(
+                        color:
+                            Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white
+                                : Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 40,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
