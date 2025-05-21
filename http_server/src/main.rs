@@ -1,5 +1,6 @@
 use std::{
-    io::{BufRead, BufReader, Read, Write},
+    fs,
+    io::{BufRead, BufReader, Write},
     net::{TcpListener, TcpStream},
 };
 
@@ -20,34 +21,29 @@ fn main() -> std::io::Result<()> {
 }
 
 fn handle_connection(mut stream: TcpStream) -> std::io::Result<()> {
-    
-    let mut buffer = [0;1024];
+    let buf_reader = BufReader::new(&stream);
+    let http_request: Vec<String> = buf_reader
+        .lines()
+        .map(|result| result.unwrap())
+        .take_while(|line| !line.is_empty())
+        .collect();
 
-    match stream.read(&mut buffer) {
-        Ok(size) => {
-            println!("Bytes: {size}");
+    let request_line = &http_request[0];
 
-            let request = String::from_utf8_lossy(&buffer[..size]);
-            println!("Request {request}");
+    println!("{request_line}");
 
-            let request_line = request.lines().next().unwrap_or("");
+    let (status_line, filename): (&'static str, &'static str) = match request_line.as_str() {
+        "GET / HTTP/1.1" => ("HTTP/1.1 200 OK", "hello.html"),
 
-            println!("{request_line}");
+        _ => ("HTTP/1.1 404 NOT FOUND", "404.html"),
+    };
 
+    let contents = fs::read_to_string(filename)?;
+    let length = contents.len();
 
-            let parts = request.split_whitespace();
+    let response = format!("{status_line}\r\nContent-Length:{length}\r\n\r\n{contents}");
 
-            println!("{:#?}", parts)
-
-
-        }
-        Err(err) => {}
-
-    }
-
-
+    stream.write_all(response.as_bytes())?;
 
     Ok(())
 }
-
-
