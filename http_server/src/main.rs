@@ -3,7 +3,7 @@ use std::{
     net::TcpListener,
 };
 
-use http_server::lib::{serve, MethodRouter, Router};
+use http_server::{serve, MethodRouter, Router};
 
 fn get_number() -> io::Result<()> {
     println!("hihi");
