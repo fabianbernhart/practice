@@ -3,7 +3,7 @@ pub mod lib {
     use std::{
         fs,
         io::{self, BufRead, BufReader, Write},
-        net::{TcpListener, TcpStream},
+        net::{TcpListener, TcpStream}, thread, time::Duration,
     };
 
     #[derive(Debug, Clone)]
@@ -18,8 +18,15 @@ pub mod lib {
         }
 
         fn handle_routes(self, request_line: &String) -> (&'static str, &'static str) {
+
             match request_line.as_str() {
-                "GET / HTTP/1.1" => ("HTTP/1.1 200 OK", "hello.html"),
+                "GET / HTTP/1.1" => {
+                    ("HTTP/1.1 200 OK", "hello.html")
+                },
+                "GET /sleep HTTP/1.1" => {
+                    thread::sleep(Duration::from_secs(5));
+                    ("HTTP/1.1 200 OK", "hello.html")
+                },
 
                 _ => ("HTTP/1.1 404 NOT FOUND", "404.html"),
             }
