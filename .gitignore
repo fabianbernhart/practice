@@ -24,3 +24,8 @@ dist-ssr
 
 # Rust
 target
+
+
+# Added by cargo
+
+/target
