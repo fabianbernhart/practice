@@ -8,5 +8,5 @@ Start with the little discipline to be ready for the big discipline.
 | -------------------- | ------------- | -------------------------------------------------------------------| ----------- |
 | Dart / Flutter       | `burple`      | Flutter UI & MVVC Architecture (App idea missing!)                 | IN PROGRESS |
 | Rust                 | `http_server` | An raw tcp http implementation using only `Standard Library`       | IN PROGRESS |
-| Rust                 | `minigrep`    | An rust implementation of the grep command (Rust Book Chapter 12)  | IN PROGRESS |
+| Rust                 | `minigrep`    | An rust implementation of the grep command (Rust Book Chapter 12)  | DONE        |
 | Javascript           | `virtual-dom` | Marc Backes - Let's Build A Virtual DOM - Vuejs Amsterdam 2023     | DONE        |
