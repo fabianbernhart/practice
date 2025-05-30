@@ -75,7 +75,7 @@ impl Config {
     /// use minigrep::Config;
     ///
     ///
-    /// env::set_var("IGNORE_CASE", "1")
+    /// // env::set_var("IGNORE_CASE", "1")!
     ///
     /// let args = vec![
     ///     "program_name".to_string(),
